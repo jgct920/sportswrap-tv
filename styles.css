@@ -68,7 +68,9 @@ textarea {
 .brand img {
   display: block;
   width: clamp(156px, 18vw, 250px);
-  height: auto;
+  height: 58px;
+  object-fit: cover;
+  object-position: center;
 }
 
 .site-nav {
