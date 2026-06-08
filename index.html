@@ -6,7 +6,7 @@
     <title>SportsWrap Productions | SportsWrap w/Jason Page</title>
     <meta
       name="description"
-      content="SportsWrap Productions is the home of SportsWrap w/Jason Page, a sports media brand built for television, digital, podcasting, newsletters, sponsors, and affiliates"
+      content="SportsWrap Productions is the home of SportsWrap w/Jason Page, a sports media brand built for television, digital, podcasting, newsletters, sponsors, and affiliates."
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -37,7 +37,7 @@
           <h1 id="hero-title">Sports. Every Story. Every Day.</h1>
           <p>
             Smart, fast-moving sports conversation from the SportsWrap studio, built for television,
-            digital, podcasting, newsletters, sponsors, and fans who want the full picture
+            digital, podcasting, newsletters, sponsors, and fans who want the full picture.
           </p>
           <div class="hero-actions">
             <a class="button primary" href="#watch">Watch Now</a>
@@ -56,16 +56,15 @@
       <section class="section split" id="watch">
         <div>
           <p class="kicker">Watch</p>
-          <h2>Watch the latest SportsWrap w/Jason Page episode</h2>
+          <h2>Watch the latest SportsWrap w/Jason Page episode.</h2>
           <p class="watch-copy">
-            This section can update automatically from the SportsWrap w/Jason Page YouTube playlist
+            This section can update automatically from the SportsWrap w/Jason Page YouTube playlist.
           </p>
         </div>
         <div class="video-panel" data-latest-video>
           <div class="video-frame">
             <iframe
               data-youtube-embed
-              src="https://www.youtube.com/playlist?list=PLaJljr_tBa-59G96I3EDcBOQOmNVyirpQ"
               title="Latest SportsWrap w/Jason Page episode"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowfullscreen
@@ -73,8 +72,8 @@
           </div>
           <div class="video-meta">
             <span>Latest Episode</span>
-            <h3 data-video-title>NBA Finals SHIFT to NYC 🏀 Stanley Cup Final Classic 🥅 Denny Hamlin Wins & Tennis Debate</h3>
-            <a data-video-link href="https://www.youtube.com/watch?v=A1b_Rp54RpY" target="_blank" rel="noreferrer">Open on YouTube</a>
+            <h3 data-video-title>SportsWrap w/Jason Page</h3>
+            <a data-video-link href="https://www.youtube.com/" target="_blank" rel="noreferrer">Open on YouTube</a>
           </div>
         </div>
       </section>
@@ -83,31 +82,31 @@
         <div class="studio-card"></div>
         <div>
           <p class="kicker">About</p>
-          <h2>Sports talk with a real studio heartbeat</h2>
+          <h2>Sports talk with a real studio heartbeat.</h2>
           <p>
             SportsWrap w/Jason Page brings viewers inside the biggest stories in sports through
             informed analysis, compelling interviews, and a show environment that feels personal,
-            collected, and built by a real sports fan
+            collected, and built by a real sports fan.
           </p>
         </div>
       </section>
 
       <section class="section" id="originals">
         <p class="kicker">Originals</p>
-        <h2>Built for fans who want more than the headline</h2>
+        <h2>Built for fans who want more than the headline.</h2>
         <div class="cards">
-          <article><span>Rankings</span><h3>The stories driving the week</h3><p>Top stories, sharp context, and the names shaping the sports conversation</p></article>
-          <article><span>Deep Dives</span><h3>More signal, less noise</h3><p>Breakdowns built for fans, affiliates, and partners who value substance</p></article>
-          <article><span>Interviews</span><h3>Conversations that travel</h3><p>Guest segments and original clips designed for broadcast and digital reach</p></article>
+          <article><span>Rankings</span><h3>The stories driving the week</h3><p>Top stories, sharp context, and the names shaping the sports conversation.</p></article>
+          <article><span>Deep Dives</span><h3>More signal, less noise</h3><p>Breakdowns built for fans, affiliates, and partners who value substance.</p></article>
+          <article><span>Interviews</span><h3>Conversations that travel</h3><p>Guest segments and original clips designed for broadcast and digital reach.</p></article>
         </div>
       </section>
 
       <section class="sponsor-section" id="sponsors">
         <p class="kicker">For Sponsors</p>
-        <h2>Reach sports fans everywhere</h2>
+        <h2>Reach sports fans everywhere.</h2>
         <p>
           SportsWrap gives brands a way to connect across television, podcasting, digital video,
-          newsletters, social content, and custom sponsor integrations
+          newsletters, social content, and custom sponsor integrations.
         </p>
         <a class="button primary" href="#contact">Request Media Kit</a>
       </section>
@@ -115,8 +114,8 @@
       <section class="section affiliate" id="affiliates">
         <div>
           <p class="kicker">Affiliates</p>
-          <h2>Join the SportsWrap network</h2>
-          <p>SportsWrap continues to expand through broadcast, regional sports, streaming, and digital partners</p>
+          <h2>Join the SportsWrap network.</h2>
+          <p>SportsWrap continues to expand through broadcast, regional sports, streaming, and digital partners.</p>
         </div>
         <a class="button secondary light" href="#contact">Affiliate Information</a>
       </section>
@@ -124,12 +123,24 @@
       <section class="section contact" id="contact">
         <div>
           <p class="kicker">Contact</p>
-          <h2>Let’s talk about what SportsWrap can do next</h2>
+          <h2>Let’s talk about what SportsWrap can do next.</h2>
         </div>
-        <form>
-          <label>Name<input type="text" placeholder="Your name" /></label>
-          <label>Email<input type="email" placeholder="you@example.com" /></label>
-          <label>Message<textarea placeholder="Tell us what you are looking for"></textarea></label>
+        <form action="https://formspree.io/f/maqzjwyg" method="POST">
+          <input type="hidden" name="_subject" value="New SportsWrap.tv inquiry" />
+          <label>Name<input type="text" name="name" placeholder="Your name" required /></label>
+          <label>Email<input type="email" name="email" placeholder="you@example.com" required /></label>
+          <label>
+            Inquiry Type
+            <select name="inquiry_type" required>
+              <option value="">Select one</option>
+              <option>Advertising / Sponsorship</option>
+              <option>Affiliate / Distribution</option>
+              <option>Guest / Booking</option>
+              <option>Media Inquiry</option>
+              <option>General</option>
+            </select>
+          </label>
+          <label>Message<textarea name="message" placeholder="Tell us what you are looking for" required></textarea></label>
           <button class="button primary" type="submit">Send Inquiry</button>
         </form>
       </section>
@@ -137,7 +148,7 @@
 
     <footer>
       <img src="assets/sportswrap-productions-logo.png" alt="SportsWrap Productions" />
-      <p>Home of SportsWrap w/Jason Page</p>
+      <p>Home of SportsWrap w/Jason Page.</p>
     </footer>
 
     <script src="script.js"></script>

@@ -13,10 +13,6 @@ siteNav?.addEventListener("click", (event) => {
   }
 });
 
-document.querySelectorAll("form").forEach((form) => {
-  form.addEventListener("submit", (event) => event.preventDefault());
-});
-
 async function loadLatestVideo() {
   const embed = document.querySelector("[data-youtube-embed]");
   const title = document.querySelector("[data-video-title]");
