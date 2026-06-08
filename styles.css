@@ -250,9 +250,45 @@ form { display: grid; gap: 16px; padding: 22px; background: white; border: 1px s
 label { font-weight: 900; }
 input, select, textarea { width: 100%; margin-top: 8px; padding: 13px 14px; border: 1px solid var(--line); border-radius: 8px; }
 textarea { min-height: 128px; resize: vertical; }
-footer { padding: 34px clamp(18px,5vw,72px); color: white; background: var(--ink); }
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 10px 13px;
+  color: var(--ink);
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: .82rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  padding: 34px clamp(18px,5vw,72px);
+  color: white;
+  background: var(--ink);
+}
 footer img { width: 230px; height: 78px; object-fit: cover; object-position: center; }
 footer p { color: rgba(255,255,255,.7); font-weight: 700; }
+.footer-socials {
+  justify-content: flex-end;
+  margin-top: 0;
+}
+.footer-socials a {
+  color: white;
+  background: rgba(255,255,255,.08);
+  border-color: rgba(255,255,255,.16);
+}
 
 @media (max-width: 940px) {
   .nav-toggle { display: block; }
@@ -272,6 +308,8 @@ footer p { color: rgba(255,255,255,.7); font-weight: 700; }
   .site-nav a { padding: 13px 0; }
   .nav-cta { text-align: center; }
   .credibility, .split, .about, .contact, .affiliate, .cards { grid-template-columns: 1fr; }
+  footer { display: grid; }
+  .footer-socials { justify-content: flex-start; }
 }
 
 @media (max-width: 560px) {
