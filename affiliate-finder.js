@@ -33,8 +33,7 @@ function renderResults() {
 
   const matches = affiliates
     .filter((affiliate) => filter === "all" || affiliate.distributionType === filter)
-    .filter((affiliate) => !query || affiliate.searchText.includes(query))
-    .slice(0, 60);
+    .filter((affiliate) => !query || affiliate.searchText.includes(query));
 
   countEl.textContent = `${matches.length} result${matches.length === 1 ? "" : "s"} shown`;
 
