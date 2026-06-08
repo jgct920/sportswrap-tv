@@ -291,7 +291,12 @@ h3 { font-size: 1.25rem; }
   background: var(--ink);
 }
 .sponsor-section p { max-width: 720px; color: rgba(255,255,255,.76); }
-.affiliate { background: var(--orange); align-items: center; }
+.affiliate {
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 460px);
+  gap: clamp(28px, 4vw, 54px);
+  background: var(--orange);
+  align-items: center;
+}
 .affiliate .kicker, .affiliate p { color: rgba(0,0,0,.74); }
 .affiliate-actions {
   display: flex;
@@ -300,7 +305,9 @@ h3 { font-size: 1.25rem; }
   margin-top: 24px;
 }
 .affiliate-logos {
-  padding: 22px;
+  justify-self: end;
+  width: min(100%, 460px);
+  padding: 18px;
   background: var(--ink);
   border-radius: 8px;
   box-shadow: 0 22px 54px rgba(0,0,0,.18);
@@ -315,7 +322,7 @@ h3 { font-size: 1.25rem; }
 }
 .affiliate-logos img {
   display: block;
-  width: min(100%, 390px);
+  width: min(100%, 330px);
   height: auto;
   margin: 0 auto;
 }
@@ -472,6 +479,7 @@ footer p { color: rgba(255,255,255,.7); font-weight: 700; }
   .site-nav a { padding: 13px 0; }
   .nav-cta { text-align: center; }
   .credibility, .split, .newsletter-section, .about, .contact, .affiliate, .cards, .affiliate-results, .finder-controls { grid-template-columns: 1fr; }
+  .affiliate-logos { justify-self: stretch; width: 100%; }
   footer { display: grid; }
   .footer-socials { justify-content: flex-start; }
 }
