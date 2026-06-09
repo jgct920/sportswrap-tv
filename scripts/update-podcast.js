@@ -66,6 +66,14 @@ function matchGuidOrLink(xml) {
   return matchTag(xml, "link") || matchTag(xml, "guid");
 }
 
+function cleanEpisodeUrl(url, audioUrl) {
+  if (!url || /^https?:\/\/(www\.)?decibel88\.com\/?$/i.test(url)) {
+    return audioUrl;
+  }
+
+  return url;
+}
+
 async function main() {
   const xml = await fetchText(feedUrl);
   const itemMatch = xml.match(/<item>([\s\S]*?)<\/item>/);
@@ -77,7 +85,7 @@ async function main() {
   const item = itemMatch[1];
   const title = matchTag(item, "title");
   const audioUrl = matchAudioUrl(item);
-  const url = matchGuidOrLink(item);
+  const url = cleanEpisodeUrl(matchGuidOrLink(item), audioUrl);
   const published = matchTag(item, "pubDate");
 
   if (!audioUrl) {
