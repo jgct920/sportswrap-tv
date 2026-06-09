@@ -41,9 +41,25 @@ function matchTag(xml, tag) {
   return match ? decodeXml(match[1].trim()) : "";
 }
 
-function matchEnclosure(xml) {
-  const match = xml.match(/<enclosure\\s+[^>]*url=["']([^"']+)["'][^>]*>/i);
+function getAttribute(tagText, attributeName) {
+  const match = tagText.match(new RegExp(`${attributeName}=["']([^"']+)["']`, "i"));
   return match ? decodeXml(match[1].trim()) : "";
+}
+
+function matchAudioUrl(xml) {
+  const candidateTags = xml.match(/<(enclosure|media:content|media:player)\b[^>]*>/gi) || [];
+
+  for (const tag of candidateTags) {
+    const url = getAttribute(tag, "url");
+    const type = getAttribute(tag, "type").toLowerCase();
+
+    if (url && (!type || type.includes("audio") || /\.(mp3|m4a|aac)(\?|$)/i.test(url))) {
+      return url;
+    }
+  }
+
+  const directAudioLink = xml.match(/https?:\/\/[^\s"'<>]+?\.(mp3|m4a|aac)(\?[^\s"'<>]*)?/i);
+  return directAudioLink ? decodeXml(directAudioLink[0]) : "";
 }
 
 function matchGuidOrLink(xml) {
@@ -60,12 +76,13 @@ async function main() {
 
   const item = itemMatch[1];
   const title = matchTag(item, "title");
-  const audioUrl = matchEnclosure(item);
+  const audioUrl = matchAudioUrl(item);
   const url = matchGuidOrLink(item);
   const published = matchTag(item, "pubDate");
 
   if (!audioUrl) {
-    throw new Error("Could not find an audio enclosure in the latest podcast episode.");
+    console.error(item.slice(0, 1200));
+    throw new Error("Could not find an audio URL in the latest podcast episode.");
   }
 
   const latestPodcast = {
