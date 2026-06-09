@@ -37,3 +37,36 @@ async function loadLatestVideo() {
 }
 
 loadLatestVideo();
+
+async function loadLatestPodcast() {
+  const audio = document.querySelector("[data-podcast-audio]");
+  const title = document.querySelector("[data-podcast-title]");
+  const date = document.querySelector("[data-podcast-date]");
+  const link = document.querySelector("[data-podcast-link]");
+
+  if (!audio || !title || !link) return;
+
+  try {
+    const response = await fetch("data/latest-podcast.json", { cache: "no-store" });
+    if (!response.ok) return;
+
+    const episode = await response.json();
+    if (!episode.audioUrl) return;
+
+    audio.src = episode.audioUrl;
+    title.textContent = episode.title || "Latest SportsWrap w/Jason Page audio episode";
+    link.href = episode.url || episode.audioUrl;
+
+    if (date && episode.published) {
+      date.textContent = new Date(episode.published).toLocaleDateString(undefined, {
+        month: "long",
+        day: "numeric",
+        year: "numeric"
+      });
+    }
+  } catch {
+    // Keep the podcast links visible if episode data is unavailable.
+  }
+}
+
+loadLatestPodcast();
