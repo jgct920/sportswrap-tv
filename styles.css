@@ -265,6 +265,7 @@ h3 { font-size: 1.25rem; }
 .short-frame {
   position: relative;
   aspect-ratio: 9 / 16;
+  min-height: clamp(420px, 124vw, 640px);
   background: linear-gradient(135deg, var(--orange), var(--ink) 58%, var(--green));
 }
 .short-frame::before {
@@ -647,8 +648,27 @@ footer p { color: rgba(255,255,255,.7); font-weight: 700; }
   .site-nav.is-open { display: flex; }
   .site-nav a { padding: 13px 0; }
   .nav-cta { text-align: center; }
-  .credibility, .split, .newsletter-section, .listen-section, .about, .contact, .affiliate, .cards, .affiliate-results, .finder-controls, .shorts-grid { grid-template-columns: 1fr; }
+  .credibility, .split, .newsletter-section, .listen-section, .about, .contact, .affiliate, .cards, .affiliate-results, .finder-controls { grid-template-columns: 1fr; }
   .shorts-heading { display: grid; }
+  .shorts-grid {
+    display: flex;
+    grid-template-columns: none;
+    gap: 14px;
+    overflow-x: auto;
+    margin: 0 -18px;
+    padding: 0 18px 14px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .short-card {
+    flex: 0 0 min(78vw, 300px);
+    scroll-snap-align: start;
+  }
+  .short-frame {
+    height: min(132vw, 520px);
+    min-height: 420px;
+    aspect-ratio: auto;
+  }
   .affiliate-logos { justify-self: stretch; width: 100%; }
   footer { display: grid; }
   .footer-socials { justify-content: flex-start; }
