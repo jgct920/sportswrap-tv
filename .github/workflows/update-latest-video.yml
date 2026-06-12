@@ -2,6 +2,11 @@ name: Update latest YouTube video
 
 on:
   workflow_dispatch:
+    inputs:
+      playlist_id:
+        description: "Optional YouTube playlist ID or playlist URL"
+        required: false
+        type: string
   schedule:
     - cron: "0 */6 * * *"
 
@@ -23,7 +28,7 @@ jobs:
 
       - name: Fetch newest playlist video
         env:
-          YOUTUBE_PLAYLIST_ID: ${{ vars.YOUTUBE_PLAYLIST_ID }}
+          YOUTUBE_PLAYLIST_ID: ${{ inputs.playlist_id || vars.YOUTUBE_PLAYLIST_ID }}
         run: node scripts/update-youtube.js
 
       - name: Commit latest video update
