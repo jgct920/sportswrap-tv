@@ -19,11 +19,11 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
 
       - name: Fetch newest playlist video
         env:
-          YOUTUBE_PLAYLIST_ID: PLaJljr_tBa-59G96I3EDcBOQOmNVyirpQ
+          YOUTUBE_PLAYLIST_ID: ${{ vars.YOUTUBE_PLAYLIST_ID }}
         run: node scripts/update-youtube.js
 
       - name: Commit latest video update
