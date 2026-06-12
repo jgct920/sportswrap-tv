@@ -1,0 +1,44 @@
+name: Update latest YouTube Shorts
+
+on:
+  workflow_dispatch:
+    inputs:
+      playlist_id:
+        description: "Optional YouTube Shorts playlist ID or playlist URL"
+        required: false
+        type: string
+  schedule:
+    - cron: "20 */6 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  update-latest-shorts:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out site
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Fetch newest Shorts playlist videos
+        env:
+          SHORTS_PLAYLIST_ID: ${{ inputs.playlist_id || vars.SHORTS_PLAYLIST_ID }}
+        run: node scripts/update-shorts.js
+
+      - name: Commit latest Shorts update
+        run: |
+          if git diff --quiet data/latest-shorts.json; then
+            echo "No Shorts update found."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/latest-shorts.json
+          git commit -m "Update latest SportsWrap Shorts"
+          git push
