@@ -38,7 +38,7 @@ Setup steps:
 6. Name it:
    YOUTUBE_PLAYLIST_ID
 
-7. Set the value to your actual playlist ID.
+7. Set the value to your actual playlist ID. A full YouTube playlist URL will also work.
 
 8. Save the variable.
 
@@ -47,6 +47,10 @@ Setup steps:
 10. Click "Update latest YouTube video".
 
 11. Click "Run workflow".
+
+    You can leave the optional playlist field blank if you saved YOUTUBE_PLAYLIST_ID as a variable.
+    If you want to test a specific playlist immediately, paste the playlist ID or full playlist URL into
+    that field.
 
 12. After it finishes, confirm data/latest-video.json changed.
 
