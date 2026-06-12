@@ -2,11 +2,28 @@ const fs = require("fs");
 const https = require("https");
 const path = require("path");
 
-const playlistId = process.env.YOUTUBE_PLAYLIST_ID;
+const playlistIdInput = process.env.YOUTUBE_PLAYLIST_ID || "";
 const outputPath = path.join(process.cwd(), "data", "latest-video.json");
 
-if (!playlistId || playlistId === "PASTE_YOUR_PLAYLIST_ID_HERE") {
-  console.error("Missing YOUTUBE_PLAYLIST_ID. Add your playlist ID in the GitHub Action.");
+function normalizePlaylistId(value) {
+  const trimmed = value.trim();
+
+  if (!trimmed || trimmed === "PASTE_YOUR_PLAYLIST_ID_HERE") {
+    return "";
+  }
+
+  try {
+    const parsed = new URL(trimmed);
+    return parsed.searchParams.get("list") || trimmed;
+  } catch {
+    return trimmed;
+  }
+}
+
+const playlistId = normalizePlaylistId(playlistIdInput);
+
+if (!playlistId) {
+  console.error("Missing YOUTUBE_PLAYLIST_ID. Add it as a GitHub repository variable or enter it when running the workflow manually.");
   process.exit(1);
 }
 
