@@ -13,6 +13,15 @@ siteNav?.addEventListener("click", (event) => {
   }
 });
 
+function escapeHtml(value = "") {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 async function loadLatestVideo() {
   const embed = document.querySelector("[data-youtube-embed]");
   const title = document.querySelector("[data-video-title]");
@@ -37,6 +46,46 @@ async function loadLatestVideo() {
 }
 
 loadLatestVideo();
+
+async function loadLatestShorts() {
+  const grid = document.querySelector("[data-shorts-grid]");
+  if (!grid) return;
+
+  try {
+    const response = await fetch("data/latest-shorts.json", { cache: "no-store" });
+    if (!response.ok) return;
+
+    const shorts = await response.json();
+    if (!Array.isArray(shorts) || shorts.length === 0) return;
+
+    grid.innerHTML = shorts.slice(0, 3).map((short) => {
+      if (!short.videoId) return "";
+
+      const title = escapeHtml(short.title || "Latest SportsWrap Short");
+      const url = escapeHtml(short.url || `https://www.youtube.com/watch?v=${short.videoId}`);
+      const videoId = encodeURIComponent(short.videoId);
+
+      return `
+        <article class="short-card">
+          <div class="short-frame">
+            <iframe
+              src="https://www.youtube.com/embed/${videoId}"
+              title="${title}"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <h3><a href="${url}" target="_blank" rel="noreferrer">${title}</a></h3>
+        </article>
+      `;
+    }).join("");
+  } catch {
+    // Keep the fallback Shorts cards visible if the latest-shorts data is unavailable.
+  }
+}
+
+loadLatestShorts();
 
 async function loadLatestPodcast() {
   const audio = document.querySelector("[data-podcast-audio]");

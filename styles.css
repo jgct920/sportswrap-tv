@@ -225,6 +225,79 @@ h3 { font-size: 1.25rem; }
   font-weight: 900;
   text-transform: uppercase;
 }
+.shorts-section {
+  padding: clamp(58px, 7vw, 92px) clamp(18px, 5vw, 72px);
+  color: var(--white);
+  background:
+    linear-gradient(135deg, rgba(11,11,11,.98), rgba(11,11,11,.92)),
+    radial-gradient(circle at 88% 18%, rgba(244,123,22,.28), transparent 34%);
+}
+.shorts-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+.shorts-heading h2 {
+  font-size: clamp(2rem, 4vw, 3.75rem);
+}
+.shorts-heading p:not(.kicker) {
+  max-width: 430px;
+  margin: 0;
+  color: rgba(255,255,255,.72);
+  font-weight: 800;
+  line-height: 1.5;
+}
+.shorts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.short-card {
+  overflow: hidden;
+  min-width: 0;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 8px;
+  box-shadow: 0 22px 54px rgba(0,0,0,.28);
+}
+.short-frame {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  background: linear-gradient(135deg, var(--orange), var(--ink) 58%, var(--green));
+}
+.short-frame::before {
+  content: "Short will load from YouTube";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  color: rgba(255,255,255,.78);
+  font-size: .84rem;
+  font-weight: 900;
+  text-align: center;
+  text-transform: uppercase;
+}
+.short-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.short-card h3 {
+  padding: 14px 15px 16px;
+  font-size: .96rem;
+  line-height: 1.15;
+}
+.short-card h3 a {
+  color: inherit;
+}
+.shorts-more {
+  margin-top: 24px;
+}
 .newsletter-section {
   display: grid;
   grid-template-columns: minmax(0, .78fr) minmax(320px, .7fr);
@@ -574,7 +647,8 @@ footer p { color: rgba(255,255,255,.7); font-weight: 700; }
   .site-nav.is-open { display: flex; }
   .site-nav a { padding: 13px 0; }
   .nav-cta { text-align: center; }
-  .credibility, .split, .newsletter-section, .listen-section, .about, .contact, .affiliate, .cards, .affiliate-results, .finder-controls { grid-template-columns: 1fr; }
+  .credibility, .split, .newsletter-section, .listen-section, .about, .contact, .affiliate, .cards, .affiliate-results, .finder-controls, .shorts-grid { grid-template-columns: 1fr; }
+  .shorts-heading { display: grid; }
   .affiliate-logos { justify-self: stretch; width: 100%; }
   footer { display: grid; }
   .footer-socials { justify-content: flex-start; }
