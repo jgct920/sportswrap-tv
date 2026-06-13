@@ -529,6 +529,53 @@ h3 { font-size: 1.25rem; }
   background: var(--ink);
 }
 .sponsor-section p { max-width: 720px; color: rgba(255,255,255,.76); }
+.sponsor-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(24px, 5vw, 64px);
+  align-items: end;
+}
+.sponsor-intro .button {
+  min-width: 190px;
+}
+.sponsor-proof {
+  margin-top: clamp(36px, 5vw, 58px);
+}
+.sponsor-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+.sponsor-grid article {
+  min-height: 230px;
+  padding: 20px;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 8px;
+}
+.sponsor-grid span {
+  display: inline-grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  margin-bottom: 28px;
+  color: var(--ink);
+  background: var(--orange);
+  border-radius: 999px;
+  font-size: .82rem;
+  font-weight: 1000;
+}
+.sponsor-grid h3 {
+  font-size: 1.02rem;
+  line-height: 1.12;
+}
+.sponsor-grid p {
+  margin-bottom: 0;
+  color: rgba(255,255,255,.72);
+  font-size: .94rem;
+  font-weight: 750;
+}
 .affiliate {
   grid-template-columns: minmax(0, 1fr) minmax(300px, 460px);
   gap: clamp(28px, 4vw, 54px);
@@ -745,7 +792,8 @@ footer p { color: rgba(255,255,255,.7); font-weight: 700; }
   .site-nav.is-open { display: flex; }
   .site-nav a { padding: 13px 0; }
   .nav-cta { text-align: center; }
-  .credibility, .split, .newsletter-section, .listen-section, .about, .contact, .affiliate, .cards, .affiliate-results, .finder-controls, .shop-intro, .shop-grid { grid-template-columns: 1fr; }
+  .credibility, .split, .newsletter-section, .listen-section, .about, .contact, .affiliate, .cards, .affiliate-results, .finder-controls, .shop-intro, .shop-grid, .sponsor-intro { grid-template-columns: 1fr; }
+  .sponsor-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .shorts-heading { display: grid; }
   .shorts-grid {
     display: flex;
@@ -790,4 +838,5 @@ footer p { color: rgba(255,255,255,.7); font-weight: 700; }
   .credibility { grid-template-columns: repeat(2, 1fr); }
   .studio-card { min-height: 320px; }
   .substack-embed, .substack-embed iframe { min-height: 320px; height: 320px; }
+  .sponsor-grid { grid-template-columns: 1fr; }
 }
