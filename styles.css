@@ -791,6 +791,189 @@ footer p { color: rgba(255,255,255,.7); font-weight: 700; }
   box-shadow: none;
 }
 
+.footer-brand {
+  display: grid;
+  justify-items: start;
+}
+.footer-brand p { margin: 8px 0 10px; }
+.footer-about-link {
+  color: var(--orange);
+  font-size: .8rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+/* About Jason Page */
+.jason-page { background: var(--ink); }
+.jason-page .site-nav a[aria-current="page"] { color: var(--orange); }
+
+.jason-hero {
+  position: relative;
+  display: grid;
+  align-items: center;
+  min-height: calc(92svh - 86px);
+  overflow: hidden;
+  color: var(--white);
+  background: #050505;
+}
+.jason-hero-image,
+.jason-hero-shade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.jason-hero-image {
+  object-fit: cover;
+  object-position: 74% 31%;
+}
+.jason-hero-shade {
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.98) 0%, rgba(0,0,0,.88) 34%, rgba(0,0,0,.46) 63%, rgba(0,0,0,.14) 100%),
+    linear-gradient(0deg, rgba(0,0,0,.62) 0%, rgba(0,0,0,0) 42%);
+}
+.jason-hero-content {
+  position: relative;
+  z-index: 1;
+  width: min(760px, calc(100% - 36px));
+  margin-left: clamp(18px, 7vw, 96px);
+  padding: 76px 0;
+}
+.jason-hero h1 {
+  max-width: 700px;
+  font-size: 5.5rem;
+}
+.jason-hero-subtitle {
+  max-width: 650px;
+  margin: 22px 0 0;
+  color: var(--orange);
+  font-size: 1.35rem;
+  font-weight: 900;
+  line-height: 1.35;
+}
+.jason-hero-copy {
+  max-width: 640px;
+  margin: 18px 0 0;
+  color: rgba(255,255,255,.82);
+  font-size: 1.08rem;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.jason-profile-band,
+.jason-productions-band {
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(320px, .72fr);
+  gap: clamp(36px, 7vw, 104px);
+  align-items: start;
+  padding: 112px clamp(18px, 6vw, 96px);
+  background: var(--paper);
+}
+.jason-section-heading h2,
+.jason-productions-band h2 {
+  max-width: 780px;
+  font-size: 3.8rem;
+}
+.jason-body-copy p,
+.jason-productions-band > p {
+  margin: 0 0 22px;
+  color: var(--muted);
+  font-size: 1.08rem;
+  font-weight: 700;
+  line-height: 1.72;
+}
+.jason-body-copy p:last-child { margin-bottom: 0; }
+
+.jason-story-band {
+  display: grid;
+  grid-template-columns: minmax(160px, .32fr) minmax(0, 1fr);
+  gap: clamp(28px, 6vw, 90px);
+  align-items: center;
+  padding: 112px clamp(18px, 7vw, 112px);
+  color: var(--white);
+  background: var(--charcoal);
+  border-top: 6px solid var(--orange);
+}
+.jason-story-number {
+  color: transparent;
+  font-size: 9rem;
+  font-weight: 900;
+  line-height: .8;
+  -webkit-text-stroke: 2px rgba(244,123,22,.72);
+}
+.jason-story-band h2 { max-width: 850px; font-size: 4rem; }
+.jason-story-band p:last-child {
+  max-width: 880px;
+  margin: 24px 0 0;
+  color: rgba(255,255,255,.74);
+  font-size: 1.12rem;
+  font-weight: 700;
+  line-height: 1.7;
+}
+
+.jason-stats {
+  padding: 106px clamp(18px, 6vw, 96px);
+  color: var(--white);
+  background: #050505;
+}
+.jason-stats-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 28px;
+  margin-bottom: 44px;
+}
+.jason-stats-heading h2 { max-width: 760px; font-size: 3.8rem; }
+.jason-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  border-top: 1px solid rgba(255,255,255,.18);
+  border-bottom: 1px solid rgba(255,255,255,.18);
+}
+.jason-stat-grid article {
+  min-width: 0;
+  padding: 34px 22px;
+  border-right: 1px solid rgba(255,255,255,.18);
+}
+.jason-stat-grid article:last-child { border-right: 0; }
+.jason-stat-grid strong {
+  display: block;
+  color: var(--orange);
+  font-size: 3.2rem;
+  font-weight: 900;
+  line-height: 1;
+}
+.jason-stat-grid span {
+  display: block;
+  margin-top: 12px;
+  color: rgba(255,255,255,.78);
+  font-size: .85rem;
+  font-weight: 900;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.jason-productions-band {
+  background: var(--white);
+}
+.jason-productions-band > p { margin: 0; }
+
+.jason-cta {
+  padding: 110px clamp(18px, 7vw, 112px);
+  color: var(--white);
+  background: var(--charcoal);
+  border-bottom: 1px solid rgba(255,255,255,.12);
+}
+.jason-cta h2 { max-width: 820px; font-size: 4.4rem; }
+.jason-cta > p:not(.kicker) {
+  max-width: 700px;
+  margin: 22px 0 0;
+  color: rgba(255,255,255,.74);
+  font-size: 1.08rem;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
 @media (max-width: 940px) {
   .nav-toggle { display: block; }
   .site-nav {
@@ -834,6 +1017,12 @@ footer p { color: rgba(255,255,255,.7); font-weight: 700; }
   .affiliate-logos { justify-self: stretch; width: 100%; }
   footer { display: grid; }
   .footer-socials { justify-content: flex-start; }
+  .jason-profile-band,
+  .jason-productions-band { grid-template-columns: 1fr; }
+  .jason-stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .jason-stat-grid article { border-bottom: 1px solid rgba(255,255,255,.18); }
+  .jason-stat-grid article:nth-child(2n) { border-right: 0; }
+  .jason-stat-grid article:last-child { border-bottom: 0; }
 }
 
 @media (max-width: 560px) {
@@ -856,4 +1045,40 @@ footer p { color: rgba(255,255,255,.7); font-weight: 700; }
   .studio-card { min-height: 320px; }
   .substack-embed, .substack-embed iframe { min-height: 320px; height: 320px; }
   .sponsor-grid { grid-template-columns: 1fr; }
+  .jason-hero { min-height: calc(92svh - 74px); align-items: end; }
+  .jason-hero-image { object-position: 58% 24%; }
+  .jason-hero-shade {
+    background:
+      linear-gradient(0deg, rgba(0,0,0,.98) 0%, rgba(0,0,0,.78) 52%, rgba(0,0,0,.18) 100%),
+      linear-gradient(90deg, rgba(0,0,0,.54), rgba(0,0,0,.18));
+  }
+  .jason-hero-content {
+    width: calc(100% - 32px);
+    margin: 0 auto;
+    padding: 230px 0 42px;
+  }
+  .jason-hero h1 { font-size: 3.2rem; }
+  .jason-hero-subtitle { font-size: 1.08rem; }
+  .jason-hero-copy { font-size: .98rem; line-height: 1.5; }
+  .jason-profile-band,
+  .jason-productions-band,
+  .jason-story-band,
+  .jason-stats,
+  .jason-cta { padding: 72px 18px; }
+  .jason-section-heading h2,
+  .jason-productions-band h2,
+  .jason-story-band h2,
+  .jason-stats-heading h2,
+  .jason-cta h2 { font-size: 2.55rem; }
+  .jason-story-band { grid-template-columns: 1fr; }
+  .jason-story-number { font-size: 5rem; }
+  .jason-stats-heading { display: block; }
+  .jason-stat-grid { grid-template-columns: 1fr; }
+  .jason-stat-grid article,
+  .jason-stat-grid article:nth-child(2n) {
+    padding: 24px 0;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255,255,255,.18);
+  }
+  .jason-stat-grid strong { font-size: 2.8rem; }
 }
