@@ -48,33 +48,34 @@
         </p>
       </section>
 
-      <section class="finder-section" aria-labelledby="affiliate-search-title">
-        <div class="finder-controls">
-          <label>
-            <span id="affiliate-search-title">Search affiliates</span>
-            <input
-              id="affiliate-search"
-              type="search"
-              placeholder="Try Atlanta, MASN, Game+, Phoenix, KNSN"
-              autocomplete="off"
-            />
-          </label>
-          <label>
-            Show
-            <select id="affiliate-filter">
-              <option value="all">All distribution</option>
-              <option value="local_market">Local markets</option>
-              <option value="regional_national">Regional / national</option>
-            </select>
-          </label>
-        </div>
+      <section class="finder-section" aria-label="Interactive affiliate map">
+        <iframe
+          id="sportswrap-affiliate-map"
+          src="/affiliate-map.html"
+          title="Find your SportsWrap affiliate and airtime"
+          style="display:block;width:100%;height:760px;border:0;"
+          loading="lazy"
+        ></iframe>
 
-        <div class="finder-summary">
-          <span id="affiliate-count">Loading affiliates</span>
-          <span>Source: May 2026 affiliate list</span>
-        </div>
+        <script>
+        (() => {
+          const frame = document.getElementById('sportswrap-affiliate-map');
 
-        <div class="affiliate-results" id="affiliate-results" aria-live="polite"></div>
+          window.addEventListener('message', event => {
+            if (
+              event.origin !== window.location.origin ||
+              event.source !== frame.contentWindow ||
+              event.data?.type !== 'sportswrap-affiliate-map-height'
+            ) return;
+
+            const height = Number(event.data.height);
+
+            if (Number.isFinite(height) && height >= 200 && height <= 5000) {
+              frame.style.height = Math.ceil(height) + 'px';
+            }
+          });
+        })();
+        </script>
       </section>
     </main>
 
@@ -95,6 +96,5 @@
     </footer>
 
     <script src="script.js"></script>
-    <script src="affiliate-finder.js"></script>
   </body>
 </html>
