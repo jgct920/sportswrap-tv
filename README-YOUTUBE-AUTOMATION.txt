@@ -12,7 +12,7 @@ Files added:
 How it works:
 
 1. GitHub runs the workflow every 6 hours, or manually when you click "Run workflow".
-2. The script reads the newest video from your YouTube playlist RSS feed.
+2. The script reads your YouTube playlist RSS feed and selects the video with the newest publication date, regardless of playlist order. An older feed entry cannot replace a newer manually featured episode.
 3. It updates data/latest-video.json.
 4. The homepage loads that JSON file and embeds the video.
 5. Porkbun republishes from GitHub.

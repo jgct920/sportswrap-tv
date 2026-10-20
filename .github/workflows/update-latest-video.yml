@@ -26,6 +26,9 @@ jobs:
         with:
           node-version: "24"
 
+      - name: Test latest-video selection
+        run: node --test tests/youtube-feed.test.cjs
+
       - name: Fetch newest playlist video
         env:
           YOUTUBE_PLAYLIST_ID: ${{ inputs.playlist_id || vars.YOUTUBE_PLAYLIST_ID }}

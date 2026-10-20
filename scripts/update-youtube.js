@@ -22,7 +22,7 @@ function normalizePlaylistId(value) {
 
 const playlistId = normalizePlaylistId(playlistIdInput);
 
-if (!playlistId) {
+if (require.main === module && !playlistId) {
   console.error("Missing YOUTUBE_PLAYLIST_ID. Add it as a GitHub repository variable or enter it when running the workflow manually.");
   process.exit(1);
 }
@@ -64,22 +64,33 @@ function matchTag(xml, tag) {
   return match ? decodeXml(match[1].trim()) : "";
 }
 
+function selectLatestVideo(xml, currentVideo = null) {
+  const entries = [...xml.matchAll(/<entry>([\s\S]*?)<\/entry>/g)].map(match => {
+    const entry = match[1];
+    return {
+      videoId: matchTag(entry, "yt:videoId"),
+      title: matchTag(entry, "title"),
+      published: matchTag(entry, "published")
+    };
+  }).filter(video => /^[A-Za-z0-9_-]{11}$/.test(video.videoId) && Number.isFinite(Date.parse(video.published)));
+
+  if (!entries.length) {
+    throw new Error("No videos with valid IDs and publication dates found in the playlist feed.");
+  }
+
+  // Playlist position is editorial ordering, not necessarily publication order.
+  entries.sort((a, b) => Date.parse(b.published) - Date.parse(a.published));
+  if (currentVideo && /^[A-Za-z0-9_-]{11}$/.test(currentVideo.videoId) &&
+      Date.parse(currentVideo.published) > Date.parse(entries[0].published)) {
+    return currentVideo;
+  }
+  return entries[0];
+}
+
 async function main() {
   const xml = await fetchText(feedUrl);
-  const entryMatch = xml.match(/<entry>([\s\S]*?)<\/entry>/);
-
-  if (!entryMatch) {
-    throw new Error("No videos found in the playlist feed.");
-  }
-
-  const entry = entryMatch[1];
-  const videoId = matchTag(entry, "yt:videoId");
-  const title = matchTag(entry, "title");
-  const published = matchTag(entry, "published");
-
-  if (!videoId) {
-    throw new Error("Could not find a YouTube video ID in the playlist feed.");
-  }
+  const currentVideo = fs.existsSync(outputPath) ? JSON.parse(fs.readFileSync(outputPath, "utf8")) : null;
+  const { videoId, title, published } = selectLatestVideo(xml, currentVideo);
 
   const latestVideo = {
     videoId,
@@ -94,7 +105,11 @@ async function main() {
   console.log(`Updated latest video: ${title} (${videoId})`);
 }
 
-main().catch((error) => {
-  console.error(error);
-  process.exit(1);
-});
+module.exports = { selectLatestVideo };
+
+if (require.main === module) {
+  main().catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
+}
