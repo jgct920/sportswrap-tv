@@ -92,9 +92,14 @@ async function main() {
   const currentVideo = fs.existsSync(outputPath) ? JSON.parse(fs.readFileSync(outputPath, "utf8")) : null;
   const { videoId, title, published } = selectLatestVideo(xml, currentVideo);
 
+  // Keep the approved correction for this episode across scheduled refreshes.
+  const displayTitle = videoId === "1d6m-awUpFQ"
+    ? "49ers, Bills or Vikings: Who's REALLY the NFL's Best Team?"
+    : title;
+
   const latestVideo = {
     videoId,
-    title,
+    title: displayTitle,
     url: `https://www.youtube.com/watch?v=${videoId}`,
     published,
     updatedAt: new Date().toISOString()
