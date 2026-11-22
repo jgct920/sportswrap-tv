@@ -84,3 +84,8 @@ img[src$="/show-logo.png"]{height:auto;object-fit:contain}
 .short-choice:hover {background:#30342e}
 .short-choice:focus-visible {outline:3px solid white;outline-offset:2px}
 @media(max-width:650px){.shorts-studio{grid-template-columns:1fr}#short-player{width:min(100%,320px,45svh);min-width:min(200px,100%);margin:auto}}
+
+.fire-tv-news { margin-top: 1.5rem; padding-left: 1rem; border-left: 3px solid var(--orange); color: #fff; }
+.fire-tv-news p { margin: .35rem 0; line-height: 1.45; }
+.fire-tv-news a, .watch-copy .fire-tv-link { color: #ffab69; text-decoration: underline; text-underline-offset: .2em; }
+#fire-tv { scroll-margin-top: 6rem; }
