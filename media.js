@@ -14,13 +14,37 @@ async function updateVideo(){
   document.getElementById('home-watch-heading').textContent=item.title;
   const link=document.querySelector('.feature-video-copy a.button');if(link)link.href=item.url;
 }
-async function updateShorts(){
-  const feed=await readFeed('latest-shorts');
-  const grid=document.querySelector('.shorts-grid');
-  if(!grid||!Array.isArray(feed))return;
-  const items=feed.map(normalizeVideo).filter(Boolean).slice(0,3);
-  if(!items.length)return;
-  grid.innerHTML=items.map((item,index)=>`<article class="short-tile"><a href="${item.url}" target="_blank" rel="noopener noreferrer" aria-label="Watch ${escapeHtml(item.title)} on YouTube (opens in a new tab)"><div class="short-image"><span class="short-brand" aria-hidden="true">SPORTSWRAP<br><span>SHORTS</span></span><span class="short-number">0${index+1}</span><span class="short-play" aria-hidden="true">↗</span></div><div class="short-copy"><p class="eyebrow ink-eyebrow">Quick-hit conversation</p><h3>${escapeHtml(item.title)}</h3></div></a></article>`).join('');
+const shortPlayer = document.getElementById('short-player');
+const choices = document.getElementById('short-choices');
+let selectedByViewer = false;
+
+function selectShort(videoId, play) {
+  const url = new URL(shortPlayer.src);
+  url.pathname = '/embed/' + videoId;
+  url.searchParams.set('autoplay', play ? '1' : '0');
+  shortPlayer.src = url.href;
+  for (const button of choices.children) {
+    button.setAttribute('aria-pressed', String(button.dataset.short === videoId));
+  }
+}
+
+choices?.addEventListener('click', event => {
+  const button = event.target.closest('[data-short]');
+  if (!button) return;
+  selectedByViewer = true;
+  selectShort(button.dataset.short, true);
+});
+
+async function updateShorts() {
+  if (!choices || !shortPlayer) return;
+  const feed = await readFeed('latest-shorts');
+  if (!Array.isArray(feed) || selectedByViewer) return;
+  const items = feed.map(normalizeVideo).filter(Boolean).slice(0, 3);
+  if (!items.length) return;
+  choices.innerHTML = items.map((item, i) => `<button type="button" class="short-choice" data-short="${item.videoId}" aria-pressed="${i === 0}"><img src="https://i.ytimg.com/vi/${item.videoId}/mqdefault.jpg" alt="" loading="lazy"><span>${escapeHtml(item.title)}</span></button>`).join('');
+  if (!new URL(shortPlayer.src).pathname.endsWith('/' + items[0].videoId)) {
+    selectShort(items[0].videoId, false);
+  }
 }
 async function updatePodcast(){
   const item=normalizePodcast(await readFeed('latest-podcast'));

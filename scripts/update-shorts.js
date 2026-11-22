@@ -66,7 +66,7 @@ function matchTag(xml, tag) {
 
 async function main() {
   const xml = await fetchText(feedUrl);
-  const entries = [...xml.matchAll(/<entry>([\s\S]*?)<\/entry>/g)].slice(0, 3);
+  const entries = [...xml.matchAll(/<entry>([\s\S]*?)<\/entry>/g)];
 
   if (entries.length === 0) {
     throw new Error("No videos found in the Shorts playlist feed.");
@@ -89,7 +89,7 @@ async function main() {
       published,
       updatedAt: new Date().toISOString()
     };
-  });
+  }).sort((a, b) => Date.parse(b.published) - Date.parse(a.published)).slice(0, 3);
 
   fs.mkdirSync(path.dirname(outputPath), { recursive: true });
   fs.writeFileSync(outputPath, `${JSON.stringify(latestShorts, null, 2)}\n`);
