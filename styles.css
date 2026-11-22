@@ -15,3 +15,15 @@ dialog{border:0;padding:0;border-radius:12px;background:var(--paper);color:var(-
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}.program-card:hover,.feature:hover .studio-image{transform:none}}
 
 .card-art{display:block;width:100%}.card-title{display:block;font-weight:750}
+
+#program-dialog .dialog-body > .eyebrow,
+#dialog-title { padding-right: 48px; }
+#dialog-player iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 200px;
+  margin-top: 16px;
+  border: 0;
+  background: #111;
+}

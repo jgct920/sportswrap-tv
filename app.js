@@ -47,7 +47,13 @@ grid.addEventListener('click',event=>{
   const button=event.target.closest('[data-program]');if(!button)return;
   const item=programs.find(entry=>entry.id===button.dataset.program);if(!item)return;
   lastOpener=button;
-  $('#dialog-art').innerHTML=poster(item);
+  const player = document.createElement('iframe');
+  player.title = item.title + ' playlist player';
+  player.allow = 'encrypted-media; fullscreen; picture-in-picture';
+  player.allowFullscreen = true;
+  player.referrerPolicy = 'strict-origin-when-cross-origin';
+  player.src = 'https://www.youtube-nocookie.com/embed/videoseries?playsinline=1&list=' + encodeURIComponent(item.playlistId);
+  $('#dialog-player').replaceChildren(player);
   $('#dialog-type').textContent=`${item.kind==='program'?'The show':'Recurring segment'} · ${item.label}`;
   $('#dialog-title').textContent=item.title;$('#dialog-description').textContent=item.detail;
   $('#dialog-facts').innerHTML=`<span>${esc(item.cadence)}</span><span>${esc(item.voice)}</span>`;
@@ -56,7 +62,7 @@ grid.addEventListener('click',event=>{
 });
 $('.dialog-close').addEventListener('click',()=>dialog.close());
 dialog.addEventListener('click',event=>{if(event.target===dialog){const box=dialog.getBoundingClientRect();if(event.clientX<box.left||event.clientX>box.right||event.clientY<box.top||event.clientY>box.bottom)dialog.close();}});
-dialog.addEventListener('close',()=>{document.body.classList.remove('modal-open');if(lastOpener?.isConnected)lastOpener.focus();});
+dialog.addEventListener('close',()=>{$('#dialog-player').replaceChildren();document.body.classList.remove('modal-open');if(lastOpener?.isConnected)lastOpener.focus();});
 $('#dialog-watch').addEventListener('click',()=>{lastOpener=null;dialog.close();activateWatch('tv');$('#watch').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});$('#tab-tv').focus({preventScroll:true});});
 function activateWatch(value){
   $$('[data-watch]').forEach(tab=>{const active=tab.dataset.watch===value;tab.setAttribute('aria-selected',String(active));tab.tabIndex=active?0:-1;const panel=$(`#panel-${tab.dataset.watch}`);panel.hidden=!active;panel.setAttribute('role','tabpanel');panel.tabIndex=0;});
