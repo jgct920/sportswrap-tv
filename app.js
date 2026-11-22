@@ -52,8 +52,6 @@ grid.addEventListener('click',event=>{
   $('#dialog-title').textContent=item.title;$('#dialog-description').textContent=item.detail;
   $('#dialog-facts').innerHTML=`<span>${esc(item.cadence)}</span><span>${esc(item.voice)}</span>`;
   $('#dialog-link').href=clipUrl(item);
-  $('#dialog-link').innerHTML=`${item.kind==='program'?'Watch on YouTube':'Find clips on YouTube'} <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span>`;
-  $('#dialog-note').textContent=item.kind==='program'?'Opens the SportsWrap YouTube channel. For local TV airtimes, use the affiliate finder.':'Opens a search within the SportsWrap YouTube channel. Clip availability varies.';
   dialog.showModal();document.body.classList.add('modal-open');
 });
 $('.dialog-close').addEventListener('click',()=>dialog.close());
