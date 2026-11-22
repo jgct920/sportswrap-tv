@@ -43,6 +43,25 @@ $$('[data-sport]').forEach(button=>button.addEventListener('click',()=>{state.sp
 $('#clear-search').addEventListener('click',()=>{state.q='';render();query.focus();});
 $('#reset-filters').addEventListener('click',reset);$('#empty-reset').addEventListener('click',reset);
 window.addEventListener('popstate',()=>{state=readState(new URLSearchParams(location.search));render(false);});
+async function setPlayerSource(player, item) {
+  let videoId = 'videoseries';
+  if (item.id === 'sportswrap') {
+    try {
+      const response = await fetch('data/latest-video.json', {cache: 'no-cache'});
+      if (!response.ok) throw new Error('Episode feed unavailable');
+      const {fullShow} = await response.json();
+      if (fullShow?.playlistId === item.playlistId && /^[\w-]{11}$/.test(fullShow.videoId)) {
+        videoId = fullShow.videoId;
+      }
+    } catch {
+      // The show playlist is still playable when episode metadata is unavailable.
+    }
+  }
+  if (player.isConnected) {
+    player.src = 'https://www.youtube-nocookie.com/embed/' + videoId +
+      '?playsinline=1&list=' + encodeURIComponent(item.playlistId);
+  }
+}
 grid.addEventListener('click',event=>{
   const button=event.target.closest('[data-program]');if(!button)return;
   const item=programs.find(entry=>entry.id===button.dataset.program);if(!item)return;
@@ -52,8 +71,8 @@ grid.addEventListener('click',event=>{
   player.allow = 'encrypted-media; fullscreen; picture-in-picture';
   player.allowFullscreen = true;
   player.referrerPolicy = 'strict-origin-when-cross-origin';
-  player.src = 'https://www.youtube-nocookie.com/embed/videoseries?playsinline=1&list=' + encodeURIComponent(item.playlistId);
   $('#dialog-player').replaceChildren(player);
+  setPlayerSource(player, item);
   $('#dialog-type').textContent=`${item.kind==='program'?'The show':'Recurring segment'} · ${item.label}`;
   $('#dialog-title').textContent=item.title;$('#dialog-description').textContent=item.detail;
   $('#dialog-facts').innerHTML=`<span>${esc(item.cadence)}</span><span>${esc(item.voice)}</span>`;

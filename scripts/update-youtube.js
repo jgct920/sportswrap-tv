@@ -97,7 +97,19 @@ async function main() {
     ? "49ers, Bills or Vikings: Who's REALLY the NFL's Best Team?"
     : title;
 
+  const showPlaylist = 'PLAHGn4tEJegY';
+  let fullShow = currentVideo?.fullShow;
+  try {
+    const showFeed = playlistId === showPlaylist ? xml : await fetchText(
+      'https://www.youtube.com/feeds/videos.xml?playlist_id=' + showPlaylist
+    );
+    fullShow = { playlistId: showPlaylist, videoId: selectLatestVideo(showFeed).videoId };
+  } catch (error) {
+    console.warn('Keeping the last verified full episode:', error.message);
+  }
+
   const latestVideo = {
+    fullShow,
     videoId,
     title: displayTitle,
     url: `https://www.youtube.com/watch?v=${videoId}`,
